@@ -1,23 +1,23 @@
-name: Deploy HTML to GitHub Pages
+name: Deploy to Hostinger FTP
 
 on:
   push:
     branches:
       - main
 
-permissions:
-  contents: write   # 🔥 most important
-
 jobs:
-  deploy:
+  ftp-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4   # updated version
+        uses: actions/checkout@v4
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          local-dir: ./
+          server-dir: /public_html/
