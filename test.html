@@ -1,1 +1,725 @@
-<h1>Hello, World! this is my first HTML page for automation thank you </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Signal — Growth Marketing Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg: #0E1117;
+    --surface: #171B24;
+    --surface-raised: #1D222D;
+    --edge: #2B3140;
+    --edge-soft: #21262F;
+    --text-hi: #F2F4F7;
+    --text-lo: #909AAB;
+    --text-dim: #5C6577;
+    --accent-a: #FF5A36;
+    --accent-a-dim: #7A3323;
+    --accent-b: #4C87FF;
+    --accent-b-dim: #26385E;
+    --good: #4FD48A;
+
+    --font-display: 'Big Shoulders Display', sans-serif;
+    --font-body: 'Work Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--text-hi);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3{
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    line-height: 0.92;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p{ margin: 0; }
+
+  a{ color: inherit; text-decoration: none; }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-a);
+    display: flex;
+    align-items: center;
+    gap: 0.55em;
+  }
+  .eyebrow::before{
+    content: "";
+    width: 0.5em;
+    height: 0.5em;
+    background: var(--accent-a);
+    border-radius: 1px;
+    flex: none;
+  }
+
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 48px);
+  }
+
+  .tnum{ font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
+
+  /* ---------- Ticker ---------- */
+  .ticker-bar{
+    border-bottom: 1px solid var(--edge-soft);
+    background: var(--surface);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-track{
+    display: inline-flex;
+    align-items: center;
+    animation: scroll-left 32s linear infinite;
+    padding: 9px 0;
+  }
+  .ticker-track span{
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.03em;
+    color: var(--text-lo);
+    padding: 0 1.4em;
+    border-right: 1px solid var(--edge);
+  }
+  .ticker-track span b{ color: var(--text-hi); font-weight: 500; }
+  .ticker-track span.up{ color: var(--good); }
+  .ticker-track span.up b{ color: var(--good); }
+  @keyframes scroll-left{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{ animation: none; }
+  }
+
+  /* ---------- Nav ---------- */
+  header.site{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(14,17,23,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--edge-soft);
+  }
+  nav.wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .logo{
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: baseline;
+    gap: 0.35em;
+  }
+  .logo::after{
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: var(--accent-a);
+    border-radius: 50%;
+    align-self: center;
+  }
+  .navlinks{
+    display: flex;
+    gap: 2.2rem;
+    font-size: 0.86rem;
+    color: var(--text-lo);
+  }
+  .navlinks a:hover{ color: var(--text-hi); }
+  .navcta{
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--edge);
+    padding: 0.55em 1.1em;
+    border-radius: 2px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .navcta:hover{ border-color: var(--accent-a); color: var(--accent-a); }
+  @media (max-width: 760px){ .navlinks{ display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: clamp(56px, 9vw, 108px) 0 clamp(40px, 6vw, 72px);
+    border-bottom: 1px solid var(--edge-soft);
+  }
+  .hero-grid{
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: end;
+  }
+  @media (max-width: 900px){ .hero-grid{ grid-template-columns: 1fr; } }
+
+  .hero h1{
+    font-size: clamp(3rem, 7vw, 5.6rem);
+    margin-top: 0.5rem;
+  }
+  .hero h1 em{
+    font-style: normal;
+    color: var(--accent-a);
+  }
+  .hero-sub{
+    margin-top: 1.4rem;
+    max-width: 46ch;
+    color: var(--text-lo);
+    font-size: 1.08rem;
+    line-height: 1.6;
+  }
+  .hero-actions{
+    margin-top: 2.1rem;
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+  }
+  .btn{
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    padding: 0.95em 1.6em;
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    transition: transform 0.15s, background 0.15s, border-color 0.15s;
+  }
+  .btn-primary{
+    background: var(--accent-a);
+    color: #140904;
+    font-weight: 500;
+  }
+  .btn-primary:hover{ transform: translateY(-1px); background: #ff6b49; }
+  .btn-ghost{
+    border: 1px solid var(--edge);
+    color: var(--text-hi);
+  }
+  .btn-ghost:hover{ border-color: var(--text-lo); }
+
+  /* departures-style board */
+  .board{
+    background: var(--surface);
+    border: 1px solid var(--edge);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .board-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9em 1.1em;
+    border-bottom: 1px solid var(--edge);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .board-head .live{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--good);
+  }
+  .board-head .live::before{
+    content:"";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--good);
+    box-shadow: 0 0 0 0 rgba(79,212,138,0.6);
+    animation: pulse 1.8s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow: 0 0 0 0 rgba(79,212,138,0.5); }
+    70%{ box-shadow: 0 0 0 6px rgba(79,212,138,0); }
+    100%{ box-shadow: 0 0 0 0 rgba(79,212,138,0); }
+  }
+  .board-row{
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.85em 1.1em;
+    border-bottom: 1px solid var(--edge-soft);
+    font-size: 0.86rem;
+  }
+  .board-row:last-child{ border-bottom: none; }
+  .board-row .ch{ color: var(--text-hi); font-weight: 500; }
+  .board-row .route{ color: var(--text-dim); font-size: 0.78rem; }
+  .board-row .metric{ font-family: var(--font-mono); text-align: right; }
+  .board-row .delta{ font-family: var(--font-mono); font-size: 0.78rem; text-align: right; }
+  .delta.up{ color: var(--good); }
+  .delta.up::before{ content: "▲ "; font-size: 0.7em; }
+
+  /* ---------- Section shell ---------- */
+  section{ padding: clamp(56px, 8vw, 96px) 0; border-bottom: 1px solid var(--edge-soft); }
+  .section-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    margin-bottom: clamp(32px, 5vw, 52px);
+    flex-wrap: wrap;
+  }
+  .section-head h2{ font-size: clamp(2.1rem, 4vw, 3.1rem); margin-top: 0.4rem; }
+  .section-head .desc{ max-width: 34ch; color: var(--text-lo); font-size: 0.98rem; line-height: 1.55; padding-bottom: 0.4rem; }
+
+  /* ---------- Channel mix ---------- */
+  .channels{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--edge);
+    border: 1px solid var(--edge);
+  }
+  @media (max-width: 860px){ .channels{ grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px){ .channels{ grid-template-columns: 1fr; } }
+  .channel{
+    background: var(--surface);
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    min-height: 190px;
+  }
+  .channel .tag{
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+  .channel h3{ font-size: 1.5rem; text-transform: none; font-weight: 700; }
+  .channel p{ color: var(--text-lo); font-size: 0.9rem; line-height: 1.55; margin-top: auto; }
+
+  /* ---------- Stats ---------- */
+  .stats{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 3vw, 40px);
+  }
+  @media (max-width: 760px){ .stats{ grid-template-columns: repeat(2, 1fr); } }
+  .stat{
+    border-top: 2px solid var(--accent-a);
+    padding-top: 1rem;
+  }
+  .stat .num{
+    font-family: var(--font-mono);
+    font-size: clamp(2.1rem, 4vw, 2.8rem);
+    font-weight: 500;
+    color: var(--text-hi);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .label{
+    margin-top: 0.5rem;
+    color: var(--text-lo);
+    font-size: 0.84rem;
+    line-height: 1.4;
+  }
+
+  /* ---------- Process ---------- */
+  .process{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--edge);
+  }
+  @media (max-width: 860px){ .process{ grid-template-columns: 1fr; } }
+  .step{
+    padding: 2rem 1.7rem;
+    border-right: 1px solid var(--edge);
+    position: relative;
+  }
+  .step:last-child{ border-right: none; }
+  @media (max-width: 860px){ .step{ border-right: none; border-bottom: 1px solid var(--edge); } .step:last-child{ border-bottom: none; } }
+  .step .idx{
+    font-family: var(--font-mono);
+    color: var(--accent-b);
+    font-size: 0.82rem;
+  }
+  .step h3{ text-transform: none; font-size: 1.35rem; margin-top: 0.8rem; font-weight: 700; }
+  .step p{ margin-top: 0.7rem; color: var(--text-lo); font-size: 0.88rem; line-height: 1.6; }
+
+  /* ---------- Case study ---------- */
+  .case{
+    background: var(--surface);
+    border: 1px solid var(--edge);
+    border-radius: 4px;
+    padding: clamp(28px, 5vw, 56px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 5vw, 56px);
+    align-items: center;
+  }
+  @media (max-width: 820px){ .case{ grid-template-columns: 1fr; } }
+  .case blockquote{
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.18;
+    text-transform: none;
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
+  .case cite{
+    display: block;
+    margin-top: 1.4rem;
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-lo);
+  }
+  .case-metrics{ display: flex; flex-direction: column; gap: 1.3rem; }
+  .case-metrics .row{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--edge-soft);
+    padding-bottom: 1rem;
+  }
+  .case-metrics .row .k{ color: var(--text-lo); font-size: 0.88rem; }
+  .case-metrics .row .v{ font-family: var(--font-mono); font-size: 1.4rem; color: var(--accent-a); }
+
+  /* ---------- CTA ---------- */
+  .cta{
+    text-align: center;
+    border-bottom: none;
+  }
+  .cta h2{ font-size: clamp(2.4rem, 6vw, 4.2rem); }
+  .cta .desc{ max-width: 46ch; margin: 1.3rem auto 0; color: var(--text-lo); font-size: 1.02rem; }
+  .cta .hero-actions{ justify-content: center; margin-top: 2.3rem; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding: 2.6rem 0 3.2rem;
+  }
+  .foot-grid{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+  .foot-grid .logo{ font-size: 1.15rem; }
+  .foot-links{
+    display: flex;
+    gap: 1.6rem;
+    font-size: 0.82rem;
+    color: var(--text-lo);
+  }
+  .foot-links a:hover{ color: var(--text-hi); }
+  .foot-note{
+    margin-top: 1.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+  :focus-visible{
+    outline: 2px solid var(--accent-b);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="ticker-bar" aria-hidden="true">
+    <div class="ticker-track">
+      <span>SEARCH <b>+38%</b></span>
+      <span class="up">PAID SOCIAL <b>+91%</b></span>
+      <span>EMAIL <b>+22%</b></span>
+      <span class="up">ORGANIC <b>+64%</b></span>
+      <span>DISPLAY <b>+11%</b></span>
+      <span class="up">CTR <b>4.8%</b></span>
+      <span>CPA <b>−31%</b></span>
+      <span class="up">ROAS <b>6.2x</b></span>
+      <span>SEARCH <b>+38%</b></span>
+      <span class="up">PAID SOCIAL <b>+91%</b></span>
+      <span>EMAIL <b>+22%</b></span>
+      <span class="up">ORGANIC <b>+64%</b></span>
+      <span>DISPLAY <b>+11%</b></span>
+      <span class="up">CTR <b>4.8%</b></span>
+      <span>CPA <b>−31%</b></span>
+      <span class="up">ROAS <b>6.2x</b></span>
+    </div>
+  </div>
+
+  <header class="site">
+    <nav class="wrap">
+      <a href="#top" class="logo">Signal</a>
+      <div class="navlinks">
+        <a href="#channels">Channels</a>
+        <a href="#results">Results</a>
+        <a href="#process">Process</a>
+        <a href="#case">Work</a>
+      </div>
+      <a class="navcta" href="#contact">Start a campaign →</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Growth marketing studio</div>
+          <h1>Cut through<br>the <em>noise.</em></h1>
+          <p class="hero-sub">Signal plans, buys, and optimizes every channel your customers actually pay attention to — search, social, and everything between the first click and the repeat one.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Book a growth audit →</a>
+            <a class="btn btn-ghost" href="#case">See the work</a>
+          </div>
+        </div>
+
+        <div class="board">
+          <div class="board-head">
+            <span>Active campaigns · Last 24h</span>
+            <span class="live">Live</span>
+          </div>
+          <div class="board-row">
+            <div><div class="ch">Paid Search</div><div class="route">Google · Bing</div></div>
+            <div class="metric tnum">4.8% CTR</div>
+            <div class="delta up tnum">+12%</div>
+          </div>
+          <div class="board-row">
+            <div><div class="ch">Paid Social</div><div class="route">Meta · TikTok</div></div>
+            <div class="metric tnum">6.2x ROAS</div>
+            <div class="delta up tnum">+34%</div>
+          </div>
+          <div class="board-row">
+            <div><div class="ch">Lifecycle Email</div><div class="route">Owned</div></div>
+            <div class="metric tnum">41% Open</div>
+            <div class="delta up tnum">+6%</div>
+          </div>
+          <div class="board-row">
+            <div><div class="ch">SEO / Content</div><div class="route">Organic</div></div>
+            <div class="metric tnum">18.4k Sessions</div>
+            <div class="delta up tnum">+22%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="channels">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Channel mix</div>
+            <h2>Where we run<br>your budget.</h2>
+          </div>
+          <p class="desc">One team across every channel, so budget shifts to whatever is converting this week — not whatever was planned last quarter.</p>
+        </div>
+
+        <div class="channels">
+          <div class="channel">
+            <div class="tag">01 · SEARCH</div>
+            <h3>Paid Search</h3>
+            <p>Intent-first bidding across Google and Bing, built around margin per keyword, not just clicks.</p>
+          </div>
+          <div class="channel">
+            <div class="tag">02 · SOCIAL</div>
+            <h3>Paid Social</h3>
+            <p>Meta, TikTok, and Pinterest creative tested in weekly batches, killed or scaled by day four.</p>
+          </div>
+          <div class="channel">
+            <div class="tag">03 · ORGANIC</div>
+            <h3>SEO &amp; Content</h3>
+            <p>Technical fixes and editorial that compound — built to still be ranking eighteen months out.</p>
+          </div>
+          <div class="channel">
+            <div class="tag">04 · OWNED</div>
+            <h3>Email &amp; SMS</h3>
+            <p>Lifecycle flows tuned to the customer's actual purchase cycle, not a generic drip.</p>
+          </div>
+          <div class="channel">
+            <div class="tag">05 · CREATIVE</div>
+            <h3>Creative Studio</h3>
+            <p>In-house design and video, so a winning ad ships in days, not through a separate agency.</p>
+          </div>
+          <div class="channel">
+            <div class="tag">06 · MEASURE</div>
+            <h3>Analytics &amp; Attribution</h3>
+            <p>A single dashboard tying spend to revenue, so every channel is judged by the same number.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="results">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Results</div>
+            <h2>The numbers<br>clients keep.</h2>
+          </div>
+          <p class="desc">Trailing twelve-month averages across active retainer accounts.</p>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="num tnum" data-count="147">0</div>
+            <div class="label">Avg. revenue growth, first 12 months (%)</div>
+          </div>
+          <div class="stat">
+            <div class="num tnum" data-count="4.6">0</div>
+            <div class="label">Blended return on ad spend</div>
+          </div>
+          <div class="stat">
+            <div class="num tnum" data-count="38">0</div>
+            <div class="label">Reduction in cost per acquisition (%)</div>
+          </div>
+          <div class="stat">
+            <div class="num tnum" data-count="52">0</div>
+            <div class="label">Active brands under retainer</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">How we work</div>
+            <h2>Four stages,<br>one retainer.</h2>
+          </div>
+          <p class="desc">Every engagement runs the same sequence — the channels change, this doesn't.</p>
+        </div>
+
+        <div class="process">
+          <div class="step">
+            <div class="idx tnum">01</div>
+            <h3>Discovery</h3>
+            <p>Audit current spend, funnel, and data — usually surfaces the first quick wins inside week one.</p>
+          </div>
+          <div class="step">
+            <div class="idx tnum">02</div>
+            <h3>Strategy</h3>
+            <p>A channel plan tied to a revenue target, with the media budget split before a single ad runs.</p>
+          </div>
+          <div class="step">
+            <div class="idx tnum">03</div>
+            <h3>Launch</h3>
+            <p>Campaigns go live in staged batches so we can isolate what's working from what isn't.</p>
+          </div>
+          <div class="step">
+            <div class="idx tnum">04</div>
+            <h3>Optimize</h3>
+            <p>Weekly budget reallocation toward the best-performing channel, creative, and audience.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="case">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Client work</div>
+            <h2>Proof, not<br>promises.</h2>
+          </div>
+        </div>
+
+        <div class="case">
+          <div>
+            <blockquote>"We stopped guessing which channel was working. Signal rebuilt our attribution first — then the growth followed."</blockquote>
+            <cite>— VP Growth, DTC skincare brand</cite>
+          </div>
+          <div class="case-metrics">
+            <div class="row"><span class="k">Revenue, 12 months</span><span class="v tnum">+212%</span></div>
+            <div class="row"><span class="k">Cost per acquisition</span><span class="v tnum">−44%</span></div>
+            <div class="row"><span class="k">Email-attributed revenue</span><span class="v tnum">3.1x</span></div>
+            <div class="row"><span class="k">Paid social ROAS</span><span class="v tnum">7.4x</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="wrap">
+        <div class="eyebrow" style="justify-content:center;">Let's talk</div>
+        <h2>Ready to find<br>your signal?</h2>
+        <p class="desc">A 30-minute audit of your current channels, funnel, and spend — no deck, just the numbers.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:hello@signal.studio">Book a growth audit →</a>
+          <a class="btn btn-ghost" href="mailto:hello@signal.studio">hello@signal.studio</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <a href="#top" class="logo">Signal</a>
+        <div class="foot-links">
+          <a href="#channels">Channels</a>
+          <a href="#results">Results</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="foot-note">© 2026 Signal Growth Marketing Studio. All campaigns monitored live.</div>
+    </div>
+  </footer>
+
+<script>
+  const counters = document.querySelectorAll('.stat .num[data-count]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function animateCount(el){
+    const target = parseFloat(el.dataset.count);
+    const isDecimal = el.dataset.count.includes('.');
+    if(reduceMotion){
+      el.textContent = target.toFixed(isDecimal ? 1 : 0);
+      return;
+    }
+    const duration = 1100;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = target * eased;
+      el.textContent = isDecimal ? val.toFixed(1) : Math.round(val);
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        animateCount(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.6 });
+
+  counters.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
